@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     const response = await fetch(sheetUrl);
     const data = await response.json();
 
-    // 수정된 부분
+    // ❗ 여기를 정확하게 고쳐야 합니다
     const match = data.find(
       (row) => row["매장명"] === storeName || row["전화번호"] === storeName
     );
