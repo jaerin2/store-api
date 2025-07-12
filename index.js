@@ -1,4 +1,3 @@
-
 const fetch = require("node-fetch");
 
 module.exports = async (req, res) => {
@@ -13,8 +12,9 @@ module.exports = async (req, res) => {
     const response = await fetch(sheetUrl);
     const data = await response.json();
 
+    // 수정된 부분
     const match = data.find(
-      (row) => row["파머스포케"] === storeName || row["031-000-0000"] === storeName
+      (row) => row["매장명"] === storeName || row["전화번호"] === storeName
     );
 
     if (!match) {
