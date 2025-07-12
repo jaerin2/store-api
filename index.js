@@ -8,20 +8,27 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const sheetUrl = "https://opensheet.vercel.app/11nBstYlw_sWr5GStL2FkR-AsX5JjtnhGaDIgUQxjmYI/Sheet1";
+    const sheetUrl =
+      "https://opensheet.vercel.app/11nBstYlw_sWr5GStL2FkR-AsX5JjtnhGaDIgUQxjmYI/Sheet1";
     const response = await fetch(sheetUrl);
     const data = await response.json();
 
+    // 정확하게 열 이름을 기준으로 비교해야 함
     const match = data.find(
-      (row) => row["매장명"] === storeName || row["전화번호"] === storeName
+      (row) =>
+        row["매장명"] === storeName || row["전화번호"] === storeName
     );
 
     if (!match) {
-      return res.status(404).json({ error: "매장 정보를 찾을 수 없습니다." });
+      return res
+        .status(404)
+        .json({ error: "매장 정보를 찾을 수 없습니다." });
     }
 
     return res.status(200).json({ result: match });
   } catch (error) {
-    return res.status(500).json({ error: "서버 오류: " + error.message });
+    return res
+      .status(500)
+      .json({ error: "서버 오류: " + error.message });
   }
 };
